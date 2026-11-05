@@ -257,5 +257,4 @@ Enable client/server console output and check the server console for `[rsg-firew
 
 ## Support
 
-- [RSG Discord](https://discord.gg/eW3ADkf4Af)
 - Support: https://buymeacoffee.com/rexshack

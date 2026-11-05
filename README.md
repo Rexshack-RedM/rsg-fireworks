@@ -2,7 +2,7 @@
 
 Player-useable fireworks and admin-controlled firework displays for the RSG Framework.
 
-**Version:** 2.0.1
+**Version:** 3.0.0
 **Author:** RexShack
 **Framework:** RSG Core
 **Dependencies:** `rsg-core`, `rsg-inventory`, `rsg-gizmo`
@@ -166,7 +166,6 @@ To add another language, copy `locales/en.json` to `locales/<code>.json`, transl
 
 ## Support
 
-- [RSG Discord](https://discord.gg/eW3ADkf4Af)
 - Support: https://buymeacoffee.com/rexshack
 
 ## License
