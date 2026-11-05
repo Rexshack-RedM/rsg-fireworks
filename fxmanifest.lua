@@ -5,8 +5,7 @@ game 'rdr3'
 name 'rsg-fireworks'
 author 'RexShack'
 description 'Firework script for RSG Framework'
-version '2.0.1'
-url 'https://discord.gg/YUV7ebzkqs'
+version '3.0.0'
 
 shared_scripts {
     '@rsg-core/shared/locale.lua',
