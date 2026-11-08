@@ -1,12 +1,9 @@
 -----------------------------------------------------------------------
--- Improved Version Checker for RexShackGaming Resources
+-- Improved Version Checker for Rexshack-RedM Resources
 ----------------------------------------------------------------------- 
 
 local resourceName = GetCurrentResourceName()
-local githubRawBase = 'https://raw.githubusercontent.com/RexShackGaming/rex-versioncheckers/main/'
--- The shared version-checkers repo may still publish this resource under its
--- original folder name, so fall back to it if the current name returns 404.
-local fallbackFolder = 'rex-fireworks'
+local githubRawBase = 'https://raw.githubusercontent.com/Rexshack-RedM/rsg-versioncheckers/main/'
 
 local function printLog(type, message)
     local color = (type == 'success' and '^2') or (type == 'warning' and '^3') or '^1'
@@ -34,18 +31,19 @@ local function isVersionOutdated(current, latest)
     return false -- equal
 end
 
-local function CheckVersion(folder, allowFallback)
+local function CheckVersion()
+    if not Config.VersionCheck then return end
     local currentVersion = GetResourceMetadata(resourceName, 'version')
     if not currentVersion then
         printLog('error', 'Unable to read current resource version from fxmanifest.lua!')
         return
     end
 
-    local versionUrl = githubRawBase .. folder .. '/version.txt'
+    local versionUrl = githubRawBase .. resourceName .. '/version.txt'
 
     PerformHttpRequest(versionUrl, function(statusCode, remoteVersion, headers)
-        if statusCode == 404 and allowFallback and folder ~= fallbackFolder then
-            CheckVersion(fallbackFolder, false)
+        if statusCode == 404 then
+            printLog('warning', 'No version entry found on GitHub for this resource (skipping check).')
             return
         end
 
@@ -69,7 +67,7 @@ local function CheckVersion(folder, allowFallback)
 
         if isVersionOutdated(currentVersion, remoteVersion) then
             printLog('error', ('OUTDATED! Please update to version %s'):format(remoteVersion))
-            printLog('error', 'Download from: https://github.com/RexShackGaming/'..GetCurrentResourceName()..'')
+            printLog('error', 'Download from: https://github.com/Rexshack-RedM/'..GetCurrentResourceName()..'')
         else
             printLog('warning', ('You are running a newer version (%s) than the remote (%s). Possible dev build?'):format(currentVersion, remoteVersion))
         end
@@ -79,4 +77,4 @@ end
 --------------------------------------------------------------------------------------------------
 -- Start version check on resource start
 --------------------------------------------------------------------------------------------------
-CheckVersion(resourceName, true)
+CheckVersion()
